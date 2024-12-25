@@ -32,7 +32,7 @@ const FullProduct: React.FC = () => {
   }, []);
 
   if (!product) {
-    return 'Загрузка...';
+    return <div>Загрузка...</div>;
   }
 
   function formatDescription(description: string): JSX.Element[] {
