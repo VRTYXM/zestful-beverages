@@ -18,12 +18,22 @@ const FullProduct: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!id) {
+      alert('ID продукта отсутствует!');
+      navigate('/');
+      return;
+    }
+
     async function fetchGoods() {
       try {
         const { data } = await axios.get(`${API_URL}/${id}`);
+        if (!data) {
+          throw new Error('Продукт не найден!');
+        }
         setProduct(data);
-      } catch (error) {
-        alert('Ошибка при получении товаров!');
+      } catch (error: any) {
+        console.error('Ошибка: ', error.message);
+        alert('Ошибка при получении данных о товаре!');
         navigate('/');
       }
     }
@@ -36,13 +46,21 @@ const FullProduct: React.FC = () => {
   }
 
   function formatDescription(description: string): JSX.Element[] {
+    if (typeof description !== 'string') {
+      return [<p key="0">Описание недоступно</p>];
+    }
+
     return description
       .split('<br /><br />')
       .map((paragraph, index) => <p key={index}>{paragraph}</p>);
   }
 
   const handleGoBack = () => {
-    navigate(-1);
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
   };
 
   return (
