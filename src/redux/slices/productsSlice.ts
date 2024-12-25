@@ -2,6 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../store';
 
+const API_URL =
+  process.env.REACT_APP_API_URL || 'https://66f17163415379191550eee7.mockapi.io/items';
+
 export type Product = {
   id: string | number;
   title: string;
@@ -27,7 +30,7 @@ export const fetchProducts = createAsyncThunk<Product[], SearchProductsParams>(
     const { categoryId, sortType, searchOrder, currentPage, searchValue } = params;
 
     const { data } = await axios.get<Product[]>(
-      `https://66f17163415379191550eee7.mockapi.io/items?page=${currentPage}&limit=4&${
+      `${API_URL}?page=${currentPage}&limit=4&${
         Number(categoryId) > 0 ? `category=${categoryId}&` : ''
       }${searchValue ? `search=${searchValue}&` : ''}sortBy=${sortType}&order=${searchOrder}`,
     );
@@ -43,9 +46,9 @@ export const fetchProductsCount = createAsyncThunk<
   const { categoryId, sortType, searchOrder, searchValue } = params;
 
   const response = await axios.get<Product[]>(
-    `https://66f17163415379191550eee7.mockapi.io/items?${
-      Number(categoryId) > 0 ? `category=${categoryId}&` : ''
-    }${searchValue ? `search=${searchValue}&` : ''}sortBy=${sortType}&order=${searchOrder}`,
+    `${API_URL}?${Number(categoryId) > 0 ? `category=${categoryId}&` : ''}${
+      searchValue ? `search=${searchValue}&` : ''
+    }sortBy=${sortType}&order=${searchOrder}`,
   );
 
   return response.data.length;

@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
+const API_URL =
+  process.env.REACT_APP_API_URL || 'https://66f17163415379191550eee7.mockapi.io/items';
+
 const FullProduct: React.FC = () => {
   const [product, setProduct] = useState<{
     imageUrl: string;
@@ -17,7 +20,7 @@ const FullProduct: React.FC = () => {
   useEffect(() => {
     async function fetchGoods() {
       try {
-        const { data } = await axios.get('https://66f17163415379191550eee7.mockapi.io/items/' + id);
+        const { data } = await axios.get(`${API_URL}/${id}`);
         setProduct(data);
       } catch (error) {
         alert('Ошибка при получении товаров!');
