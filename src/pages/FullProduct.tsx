@@ -29,7 +29,7 @@ const FullProduct: React.FC = () => {
     }
 
     fetchGoods();
-  }, []);
+  }, [id, navigate]);
 
   if (!product) {
     return <div>Загрузка...</div>;

@@ -34,7 +34,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     if (!types.includes(activeType)) {
       setActiveType(types.length > 0 ? types[0] : -1);
     }
-  }, [types]);
+  }, [activeType, types]);
 
   const addedCount = cartItems
     ? cartItems.reduce((accumulator, item) => accumulator + item.count, 0)
