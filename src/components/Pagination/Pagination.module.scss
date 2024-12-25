@@ -1,0 +1,52 @@
+@import '../../scss/variables.scss';
+
+.root {
+  --button-size: 40px;
+  font-size: 14px;
+
+  @media (max-width: 350px) {
+    --button-size: 30px;
+    font-size: 10px;
+  }
+
+  @media (max-width: 730px) {
+    justify-self: center;
+    place-self: center;
+    text-align: center;
+  }
+
+  li {
+    display: inline-flex;
+    text-align: center;
+    margin-bottom: 10px;
+
+    a {
+      display: inherit;
+      justify-content: center;
+      align-items: center;
+      color: $orange;
+      width: var(--button-size);
+      height: var(--button-size);
+      padding: 10px;
+      margin-right: 10px;
+      border: 1px solid $orange;
+      border-radius: 30px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fe966c;
+        color: #ffd8c9;
+      }
+    }
+  }
+
+  :global {
+    .selected {
+      a {
+        background-color: $orange;
+        color: #fff;
+        border: 1px solid $orange;
+      }
+    }
+  }
+}
