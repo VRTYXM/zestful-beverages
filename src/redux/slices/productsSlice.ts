@@ -29,11 +29,18 @@ export const fetchProducts = createAsyncThunk<Product[], SearchProductsParams>(
   async (params) => {
     const { categoryId, sortType, searchOrder, currentPage, searchValue } = params;
 
-    const { data } = await axios.get<Product[]>(
-      `${API_URL}?page=${currentPage}&limit=4&${
-        Number(categoryId) > 0 ? `category=${categoryId}&` : ''
-      }${searchValue ? `search=${searchValue}&` : ''}sortBy=${sortType}&order=${searchOrder}`,
-    );
+    const query = [
+      `page=${currentPage}`,
+      `limit=4`,
+      Number(categoryId) > 0 ? `category=${categoryId}` : '',
+      searchValue ? `search=${searchValue}` : '',
+      `sortBy=${sortType}`,
+      `order=${searchOrder}`,
+    ]
+      .filter(Boolean)
+      .join('&');
+
+    const { data } = await axios.get<Product[]>(`${API_URL}?${query}`);
 
     return data;
   },

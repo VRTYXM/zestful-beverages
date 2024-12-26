@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import debounce from 'lodash.debounce';
-import { setSearchValue } from '../../redux/slices/filterSlice';
+import { setCategoryId, setSearchValue } from '../../redux/slices/filterSlice';
 
 import styles from './Search.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,9 @@ const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
+
   const searchValue = useSelector((state: RootState) => state.filter.searchValue);
+  const categoryId = useSelector((state: RootState) => state.filter.categoryId);
 
   const onClickClear = () => {
     dispatch(setSearchValue(''));
@@ -20,6 +22,9 @@ const Search: React.FC = () => {
 
   const updateSearchValue = useCallback(
     debounce((str: string) => {
+      if (categoryId) {
+        dispatch(setCategoryId(0));
+      }
       dispatch(setSearchValue(str));
     }, 250),
     [dispatch],
