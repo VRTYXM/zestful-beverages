@@ -22,12 +22,12 @@ const Search: React.FC = () => {
 
   const updateSearchValue = useCallback(
     debounce((str: string) => {
-      if (categoryId) {
+      if (categoryId !== 0) {
         dispatch(setCategoryId(0));
       }
       dispatch(setSearchValue(str));
     }, 250),
-    [dispatch],
+    [dispatch, categoryId],
   );
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {

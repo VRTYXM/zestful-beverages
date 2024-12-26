@@ -15,8 +15,10 @@
       transition: background-color $duration ease-in-out;
       @include noselect();
 
-      &:hover {
-        background-color: darken(#f9f9f9, 2%);
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: darken(#f9f9f9, 2%);
+        }
       }
 
       &:active {

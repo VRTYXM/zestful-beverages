@@ -24,8 +24,10 @@
     transition: all $duration ease-in-out;
   }
 
-  &:hover {
-    background-color: $accent-yellow;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: $accent-yellow;
+    }
   }
 
   &:active {
@@ -53,9 +55,15 @@
   &--black {
     background-color: $black;
 
-    &:hover,
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: lighten($black, 8%);
+      }
+    }
+
     &:active {
-      background-color: lighten($color: $black, $amount: 10);
+      background-color: lighten($black, 10%);
+      transform: translateY(1px);
     }
   }
 
@@ -73,17 +81,19 @@
       }
     }
 
-    &:hover {
-      background-color: $orange;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $orange;
 
-      &,
-      span {
-        color: #fff;
-      }
+        &,
+        span {
+          color: #fff;
+        }
 
-      svg {
-        path {
-          fill: #fff;
+        svg {
+          path {
+            fill: #fff;
+          }
         }
       }
     }
@@ -111,10 +121,12 @@
       font-size: 16px;
     }
 
-    &:hover {
-      i {
-        background-color: #fff;
-        color: $orange;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        i {
+          background-color: #fff;
+          color: $orange;
+        }
       }
     }
 

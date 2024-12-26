@@ -33,7 +33,14 @@
       border-radius: 30px;
       cursor: pointer;
 
-      &:hover {
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: #fe966c;
+          color: #ffd8c9;
+        }
+      }
+
+      &:active {
         background-color: #fe966c;
         color: #ffd8c9;
       }

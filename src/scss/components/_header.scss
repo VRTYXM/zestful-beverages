@@ -28,6 +28,8 @@
 
   &__logo {
     display: flex;
+    justify-items: center;
+    place-items: center;
 
     img {
       max-width: 80px;

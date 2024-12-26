@@ -44,6 +44,7 @@ const Home: React.FC = () => {
   );
 
   const onChangePage = (page: number) => {
+    window.scrollTo(0, 0);
     dispatch(setCurrentPage(page));
   };
 
@@ -89,8 +90,6 @@ const Home: React.FC = () => {
 
   // Если был первый рендер, то запрашиваем товары
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     const initialQueryString = qs.stringify({
       categoryId: initialState.categoryId,
       sortType: initialState.sort.sortProperty,

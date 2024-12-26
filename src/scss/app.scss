@@ -201,7 +201,20 @@ body {
       transition: all $duration ease-in-out;
     }
 
-    &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        svg {
+          path {
+            stroke: darken($color: #b6b6b6, $amount: 50);
+          }
+        }
+        span {
+          color: darken($color: #b6b6b6, $amount: 50);
+        }
+      }
+    }
+
+    &:active {
       svg {
         path {
           stroke: darken($color: #b6b6b6, $amount: 50);
@@ -336,7 +349,14 @@ body {
           height: 11.5px;
           position: relative;
         }
-        &:hover,
+
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            border-color: darken($color: $gray-line, $amount: 80);
+            background-color: darken($color: $gray-line, $amount: 80);
+          }
+        }
+
         &:active {
           border-color: darken($color: $gray-line, $amount: 80);
           background-color: darken($color: $gray-line, $amount: 80);
@@ -388,7 +408,18 @@ body {
           font-weight: 600;
         }
 
-        &:hover {
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background-color: darken($color: $gray-line, $amount: 90);
+            border-color: darken($color: $gray-line, $amount: 90);
+
+            span {
+              color: $gray-line;
+            }
+          }
+        }
+
+        &:active {
           background-color: darken($color: $gray-line, $amount: 90);
           border-color: darken($color: $gray-line, $amount: 90);
 
@@ -459,6 +490,11 @@ body {
   img {
     max-width: 100%;
     max-height: 260px;
+
+    @media (max-width: 700px) {
+      display: block;
+      margin: 0 auto 10px auto;
+    }
   }
 
   h2,

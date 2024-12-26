@@ -7,7 +7,9 @@ import './scss/app.scss';
 import MainLayout from './layouts/MainLayout';
 
 const Cart = lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'));
-const FullProduct = lazy(() => import(/* webpackChunkName: "FullProduct" */ './pages/FullProduct'));
+const FullProduct = lazy(
+  () => import(/* webpackChunkName: "FullProduct" */ './pages/FullProduct/FullProduct'),
+);
 const NotFound = lazy(() => import(/* webpackChunkName: "NotFound" */ './pages/NotFound'));
 
 function App() {
