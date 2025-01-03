@@ -25,6 +25,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItemsById(id));
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const initialType = types.length > 0 ? types[0] : -1;
   const [activeType, setActiveType] = useState(initialType);
@@ -64,7 +65,12 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     <div className="product-block-wrapper">
       <div className="product-block">
         <Link to={`/product/${id}`}>
-          <img className="product-block__image" src={imageUrl} alt="Product" />
+          <img
+            className={`product-block__image ${imageLoaded ? 'loaded' : ''}`}
+            onLoad={() => setImageLoaded(true)}
+            src={imageUrl}
+            alt="Product"
+          />
           <h4 className="product-block__title">{title}</h4>
         </Link>
         <div className="product-block__selector">

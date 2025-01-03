@@ -2,9 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CartItem from '../components/CartItem';
-import CartEmpty from '../components/CartEmpty';
-import { clearItems, selectCart } from '../redux/slices/cartSlice';
+import CartItem from '../../components/CartItem';
+import CartEmpty from '../../components/CartEmpty';
+import { clearItems, selectCart } from '../../redux/slices/cartSlice';
 
 const Cart: React.FC = () => {
   const navigate = useNavigate();

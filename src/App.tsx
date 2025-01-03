@@ -2,15 +2,18 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+
+import FullProductSkeleton from './pages/FullProduct/Skeleton';
+import CartSkeleton from './pages/Cart/Skeleton';
 
 import './scss/app.scss';
 import MainLayout from './layouts/MainLayout';
 
-const Cart = lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'));
+const Cart = lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart/Cart'));
 const FullProduct = lazy(
   () => import(/* webpackChunkName: "FullProduct" */ './pages/FullProduct/FullProduct'),
 );
-const NotFound = lazy(() => import(/* webpackChunkName: "NotFound" */ './pages/NotFound'));
 
 function App() {
   return (
@@ -20,7 +23,7 @@ function App() {
         <Route
           path="product/:id"
           element={
-            <Suspense fallback={<div>Грузим товары...</div>}>
+            <Suspense fallback={<FullProductSkeleton />}>
               <FullProduct />
             </Suspense>
           }
@@ -28,19 +31,12 @@ function App() {
         <Route
           path="cart"
           element={
-            <Suspense fallback={<div>Загрузка корзины...</div>}>
+            <Suspense fallback={<CartSkeleton />}>
               <Cart />
             </Suspense>
           }
         />
-        <Route
-          path="*"
-          element={
-            <Suspense fallback={<div>Загрузка...</div>}>
-              <NotFound />
-            </Suspense>
-          }
-        />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

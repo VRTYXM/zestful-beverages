@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem, CartItem, minusItem, removeItem } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
@@ -26,6 +26,7 @@ const CartItemBlock: React.FC<CartItemProps> = ({
   imageUrl,
 }) => {
   const dispatch = useDispatch();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const onClickPlus = () => {
     dispatch(
@@ -49,7 +50,12 @@ const CartItemBlock: React.FC<CartItemProps> = ({
     <div className="cart__item">
       <div className="cart__item-img">
         <Link to={`/product/${id}`}>
-          <img className="product-block__image" src={imageUrl} alt="Product" />
+          <img
+            className={`product-block__image ${imageLoaded ? 'loaded' : ''}`}
+            onLoad={() => setImageLoaded(true)}
+            src={imageUrl}
+            alt="Product"
+          />
         </Link>
       </div>
       <div className="cart__item-info">

@@ -17,6 +17,13 @@
 
   &__image {
     height: 260px;
+    opacity: 0;
+    transition: opacity $duration ease;
+    @include noselect();
+
+    &.loaded {
+      opacity: 1;
+    }
 
     @media (max-width: 350px) {
       height: 220px;
